@@ -1,4 +1,4 @@
-package com.example.astonfinalproject.main.profile.data.episode
+package com.example.astonfinalproject.main.features.profile.data.episode
 
 data class Result(
     val id: Int,

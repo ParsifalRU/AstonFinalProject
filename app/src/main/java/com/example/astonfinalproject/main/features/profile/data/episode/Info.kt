@@ -1,4 +1,4 @@
-package com.example.astonfinalproject.main.profile.data.location
+package com.example.astonfinalproject.main.features.profile.data.episode
 
 data class Info(
     val count: Int,

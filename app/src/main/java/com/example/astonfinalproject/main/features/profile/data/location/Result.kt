@@ -1,4 +1,4 @@
-package com.example.astonfinalproject.main.profile.data.location
+package com.example.astonfinalproject.main.features.profile.data.location
 
 data class Result(
     val id: Int,

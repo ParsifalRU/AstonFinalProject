@@ -1,4 +1,4 @@
-package com.example.astonfinalproject.main.profile.presentation.mainscreen.menu
+package com.example.astonfinalproject.main.features.profile.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,18 +8,18 @@ import androidx.fragment.app.Fragment
 import com.example.astonfinalproject.R
 
 
-class CharacterFragment : Fragment() {
+class EpisodeFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_character, container, false)
+        return inflater.inflate(R.layout.fragment_episode, container, false)
     }
 
-
-    fun newInstance(): CharacterFragment {
-        return CharacterFragment()
+    fun newInstance(): EpisodeFragment {
+        return EpisodeFragment()
     }
+
 }

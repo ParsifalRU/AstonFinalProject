@@ -1,4 +1,4 @@
-package com.example.astonfinalproject.main.profile.presentation.mainscreen.menu
+package com.example.astonfinalproject.main.features.profile.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
