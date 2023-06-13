@@ -7,7 +7,8 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.astonfinalproject.R
 import com.example.astonfinalproject.main.features.profile.data.api.Api
 import com.example.astonfinalproject.main.features.profile.data.api.ApiRepository
-import com.example.astonfinalproject.main.features.profile.data.character.Character
+import com.example.astonfinalproject.main.features.profile.data.dto.character.Character
+import com.example.astonfinalproject.main.features.profile.presentation.character.CharacterFragment
 import com.example.astonfinalproject.main.network.NetworkModule
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,8 +38,8 @@ class MainActivity : AppCompatActivity() {
 
         thread {
             val takeRepo = ApiRepository(NetworkModule().provideRetrofit().create(Api::class.java))
-            val response = takeRepo.getResponse()
-                .enqueue(object : Callback<com.example.astonfinalproject.main.features.profile.data.character.Character>{
+            val response = takeRepo.getResponseCharacter()
+                .enqueue(object : Callback<Character>{
                     override fun onResponse(call: Call<Character>, response: Response<Character>) {
                         Log.d("LOGTAG", response.body().toString())
                     }

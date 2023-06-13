@@ -1,4 +1,4 @@
-package com.example.astonfinalproject.main.features.profile.presentation.characterScreen
+package com.example.astonfinalproject.main.features.profile.presentation.character.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 

@@ -1,4 +1,4 @@
-package com.example.astonfinalproject.main.features.profile.presentation.characterScreen
+package com.example.astonfinalproject.main.features.profile.presentation.character.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -24,7 +24,7 @@ class CharacterListAdapter:androidx.recyclerview.widget.ListAdapter<CharacterMod
             setImage(view.context,"https://rickandmortyapi.com/api/character/avatar/1.jpeg", view.findViewById(R.id.character_imageView))
         }
 
-        fun setImage(context: Context, url: String, imageView: ImageView){
+        private fun setImage(context: Context, url: String, imageView: ImageView){
             Glide
                 .with(context)
                 .load(url)
@@ -46,6 +46,4 @@ class CharacterListAdapter:androidx.recyclerview.widget.ListAdapter<CharacterMod
         holder.bind(model)
 
     }
-
-
 }

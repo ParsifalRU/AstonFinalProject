@@ -1,4 +1,4 @@
-package com.example.astonfinalproject.main.features.profile.data.character
+package com.example.astonfinalproject.main.features.profile.data.dto.character
 
 data class Result(
     val id : Int,
