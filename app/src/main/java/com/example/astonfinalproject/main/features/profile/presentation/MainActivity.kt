@@ -1,61 +1,80 @@
 package com.example.astonfinalproject.main.features.profile.presentation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.astonfinalproject.R
-import com.example.astonfinalproject.main.features.profile.data.api.Api
-import com.example.astonfinalproject.main.features.profile.data.api.ApiRepository
-import com.example.astonfinalproject.main.features.profile.data.dto.character.Character
+import androidx.fragment.app.Fragment
 import com.example.astonfinalproject.main.features.profile.presentation.character.CharacterFragment
-import com.example.astonfinalproject.main.network.NetworkModule
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import kotlin.concurrent.thread
+import com.example.astonfinalproject.main.features.profile.presentation.episode.EpisodeFragment
+import com.example.astonfinalproject.main.features.profile.presentation.location.LocationFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
 
+    var isSupportFragmentManagerEnabled = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         setSplashScreen()
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-       supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.mainFragmentContainer, CharacterFragment())
-            .commit()
+        if (savedInstanceState != null){
+            isSupportFragmentManagerEnabled = savedInstanceState.getBoolean(FRAGMENT_MANAGER_KEY)
+        }
+
+        setContentView(com.example.astonfinalproject.R.layout.activity_main)
+
+
+        if (!isSupportFragmentManagerEnabled){
+            setFragment(CharacterFragment())
+            isSupportFragmentManagerEnabled = true
+        }
+
+        setBottomNavigation()
 
     }
+
     private fun setSplashScreen(){
         installSplashScreen()
         Thread.sleep(2000)
-
-        thread {
-            val takeRepo = ApiRepository(NetworkModule().provideRetrofit().create(Api::class.java))
-            val response = takeRepo.getResponseCharacter()
-                .enqueue(object : Callback<Character>{
-                    override fun onResponse(call: Call<Character>, response: Response<Character>) {
-                        Log.d("LOGTAG", response.body().toString())
-                    }
-
-                    override fun onFailure(call: Call<Character>, t: Throwable) {
-                        Log.d("LOGTAG", t.toString())
-                    }
-
-                })
-
-        }
-
     }
 
+    private fun setFragment(fragment : Fragment){
+        supportFragmentManager
+            .beginTransaction()
+            .replace(com.example.astonfinalproject.R.id.mainFragmentContainer, fragment)
+            .commit()
+    }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(FRAGMENT_MANAGER_KEY, isSupportFragmentManagerEnabled)
+    }
 
+    private fun setBottomNavigation(){
+        val bottomNavigation = findViewById<BottomNavigationView>(com.example.astonfinalproject.R.id.bottomNavigationView)
+        bottomNavigation.setOnItemSelectedListener {
+            when(it.itemId){
+                com.example.astonfinalproject.R.id.navigation_character -> {
+                    setFragment(CharacterFragment())
+                    return@setOnItemSelectedListener true
+                }
+                com.example.astonfinalproject.R.id.navigation_episode -> {
+                    setFragment(EpisodeFragment())
+                    return@setOnItemSelectedListener true
+                }
+                com.example.astonfinalproject.R.id.navigation_location -> {
+                    setFragment(LocationFragment())
+                    return@setOnItemSelectedListener true
+                }
+                else -> {return@setOnItemSelectedListener false}
+            }
+        }
+    }
 
-
+    companion object {
+        const val FRAGMENT_MANAGER_KEY = "FRAGMENT_MANAGER_KEY"
+    }
 }

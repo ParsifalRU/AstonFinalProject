@@ -19,7 +19,7 @@ class LocationListAdapter:androidx.recyclerview.widget.ListAdapter<LocationModel
             view.findViewById<TextView>(R.id.location_name_textView).text = model.name
             view.findViewById<TextView>(R.id.location_type_textView).text = model.type
             view.findViewById<TextView>(R.id.location_dimension_textView).text = model.dimension
-            val listView = view.findViewById<ListView>(R.id.episode_listView)
+            val listView = view.findViewById<ListView>(R.id.location_listView)
             val adapterListView: ArrayAdapter<String> =
                 ArrayAdapter(view.context, android.R.layout.simple_list_item_1, model.residents)
             listView.adapter = adapterListView

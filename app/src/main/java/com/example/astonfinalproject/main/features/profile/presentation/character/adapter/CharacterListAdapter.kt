@@ -1,6 +1,7 @@
 package com.example.astonfinalproject.main.features.profile.presentation.character.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,10 +19,15 @@ class CharacterListAdapter:androidx.recyclerview.widget.ListAdapter<CharacterMod
 
         fun bind(model: CharacterModel){
             view.findViewById<TextView>(R.id.character_name_textView).text = model.name
-            view.findViewById<TextView>(R.id.character_name_textView).text = model.status
-            view.findViewById<TextView>(R.id.character_name_textView).text = model.species
-            view.findViewById<TextView>(R.id.character_name_textView).text = model.gender
-            setImage(view.context,"https://rickandmortyapi.com/api/character/avatar/1.jpeg", view.findViewById(R.id.character_imageView))
+            view.findViewById<TextView>(R.id.character_gender_textView).text = model.status
+            view.findViewById<TextView>(R.id.character_species_textView).text = model.species
+            view.findViewById<TextView>(R.id.character_status_textView).text = model.gender
+            try {
+                setImage(view.context,model.image, view.findViewById(R.id.character_imageView))
+            }catch (exception : Exception){
+                Log.d("LOGTAG", exception.toString())
+            }
+
         }
 
         private fun setImage(context: Context, url: String, imageView: ImageView){

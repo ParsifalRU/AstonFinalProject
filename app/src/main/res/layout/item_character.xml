@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:layout_marginTop="5dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
@@ -12,7 +13,6 @@
         android:layout_height="wrap_content"/>
 
     <LinearLayout
-        android:background="#515555"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -24,7 +24,6 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="123456789"
             android:layout_margin="5dp"
             android:id="@+id/character_status_textView"
             android:layout_width="wrap_content"
