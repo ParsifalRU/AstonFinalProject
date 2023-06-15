@@ -5,5 +5,5 @@ data class EpisodeModel(
     val name: String,
     val episode: String,
     val air_data: String,
-    val characters: List<String>
+    val characters: String
 )

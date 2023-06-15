@@ -3,8 +3,6 @@ package com.example.astonfinalproject.main.features.profile.presentation.episode
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.astonfinalproject.R
@@ -15,14 +13,16 @@ class EpisodeListAdapter:androidx.recyclerview.widget.ListAdapter<EpisodeModel, 
 
     class EpisodeViewHolder(private val view: View): RecyclerView.ViewHolder(view){
 
+        private val nameTextView: TextView = view.findViewById<TextView>(R.id.episode_name_textView)
+        private val numberTextView: TextView = view.findViewById<TextView>(R.id.episode_number_textView)
+        private val airDateTextView: TextView = view.findViewById<TextView>(R.id.episode_air_date_textView)
+        private val characterTextView: TextView = view.findViewById(R.id.episode_characters_textView)
+
         fun bind(model: EpisodeModel){
-            view.findViewById<TextView>(R.id.episode_name_textView).text = model.name
-            view.findViewById<TextView>(R.id.episode_number_textView).text = model.episode
-            view.findViewById<TextView>(R.id.episode_air_date_textView).text = model.air_data
-            val listView = view.findViewById<ListView>(R.id.episode_listView)
-            val adapterListView: ArrayAdapter<String> =
-                ArrayAdapter(view.context, android.R.layout.simple_list_item_1, model.characters)
-            listView.adapter = adapterListView
+            nameTextView.text = model.name
+            numberTextView.text = model.episode
+            airDateTextView.text = model.air_data
+            airDateTextView.text = model.characters
         }
     }
 

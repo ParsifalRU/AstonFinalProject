@@ -39,9 +39,10 @@ class CharacterFragment : Fragment() {
 
         if (savedInstanceState != null) {
             savedPosition = savedInstanceState.getInt("position", 0)
+        }else{
+            viewModel.getCharacters()
         }
 
-        viewModel.getCharacters()
         viewModel.characterMutableLiveData.observe(viewLifecycleOwner) { response ->
             list = List(response.results.size) { index ->
                 CharacterModel(

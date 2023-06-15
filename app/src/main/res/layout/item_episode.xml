@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:layout_margin="5dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="#E8F1D3"
     android:orientation="horizontal">
 
     <LinearLayout
-        android:background="#515555"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
-            android:layout_margin="5dp"
+            android:layout_margin="2dp"
             android:id="@+id/episode_name_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="123456789"
-            android:layout_margin="5dp"
+            android:layout_margin="2dp"
             android:id="@+id/episode_number_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -31,16 +31,11 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:layout_margin="5dp"
-            android:id="@+id/character_gender_textView"
+            android:layout_margin="2dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/episode_characters_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
-        <ListView
-            android:id="@+id/episode_listView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
     </LinearLayout>
 
 </LinearLayout>

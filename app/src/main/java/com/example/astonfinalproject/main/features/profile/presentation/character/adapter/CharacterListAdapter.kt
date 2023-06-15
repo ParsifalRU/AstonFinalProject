@@ -50,6 +50,5 @@ class CharacterListAdapter:androidx.recyclerview.widget.ListAdapter<CharacterMod
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         val model = getItem(position)
         holder.bind(model)
-
     }
 }

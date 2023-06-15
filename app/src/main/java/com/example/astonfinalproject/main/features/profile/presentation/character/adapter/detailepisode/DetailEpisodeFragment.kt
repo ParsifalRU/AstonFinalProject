@@ -1,4 +1,4 @@
-package com.example.astonfinalproject.main.features.profile.presentation.detailepisode
+package com.example.astonfinalproject.main.features.profile.presentation.character.adapter.detailepisode
 
 import android.os.Bundle
 import android.view.LayoutInflater

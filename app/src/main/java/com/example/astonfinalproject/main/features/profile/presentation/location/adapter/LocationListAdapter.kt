@@ -3,31 +3,33 @@ package com.example.astonfinalproject.main.features.profile.presentation.locatio
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.astonfinalproject.R
+import com.example.astonfinalproject.main.features.profile.data.api.ApiViewModel
 
-class LocationListAdapter:androidx.recyclerview.widget.ListAdapter<LocationModel, LocationListAdapter.LocationViewHolder>(
+
+class LocationListAdapter(
+    private val viewModel: ApiViewModel
+):androidx.recyclerview.widget.ListAdapter<LocationModel, LocationListAdapter.LocationViewHolder>(
     LocationDiffUtil
 ){
+    class LocationViewHolder(view: View): RecyclerView.ViewHolder(view){
 
-    class LocationViewHolder(private val view: View): RecyclerView.ViewHolder(view){
+        private val nameTextView: TextView = view.findViewById(R.id.location_name_textView)
+        private val typeTextView: TextView = view.findViewById(R.id.location_type_textView)
+        private val dimensionTextView: TextView = view.findViewById(R.id.location_dimension_textView)
+        private val characterTextView: TextView = view.findViewById(R.id.location_characters_textView)
 
         fun bind(model: LocationModel){
-            view.findViewById<TextView>(R.id.location_name_textView).text = model.name
-            view.findViewById<TextView>(R.id.location_type_textView).text = model.type
-            view.findViewById<TextView>(R.id.location_dimension_textView).text = model.dimension
-            val listView = view.findViewById<ListView>(R.id.location_listView)
-            val adapterListView: ArrayAdapter<String> =
-                ArrayAdapter(view.context, android.R.layout.simple_list_item_1, model.residents)
-            listView.adapter = adapterListView
+            nameTextView.text = model.name
+            typeTextView.text = model.type
+            dimensionTextView.text = model.dimension
+            characterTextView.text = model.residents
         }
-
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): LocationViewHolder {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): LocationListAdapter.LocationViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.item_location, viewGroup, false)
         return LocationViewHolder(view)
