@@ -33,19 +33,7 @@ class CharacterListAdapter(
             }catch (exception : Exception){
                 Log.d("LOGTAG", exception.toString())
             }
-
-            view.findViewById<LinearLayout>(R.id.item_character_linearLayout).setOnClickListener {
-                val bundle = Bundle()
-                bundle.putString(KEY_BUNDLE, "${model.id}")
-                val detailCharacterFragment = DetailCharacterFragment()
-                detailCharacterFragment.arguments = bundle
-                characterFragment.requireActivity()
-                    .supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.mainFragmentContainer, detailCharacterFragment)
-                    .addToBackStack("DetailCharacterFragment")
-                    .commit()
-            }
+            openDetailCharacterFragment(model, characterFragment )
         }
 
         private fun setImage(context: Context, url: String, imageView: ImageView){
@@ -56,7 +44,20 @@ class CharacterListAdapter(
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(imageView)
         }
-
+        private fun openDetailCharacterFragment(model: CharacterModel, characterFragment: CharacterFragment){
+            view.findViewById<LinearLayout>(R.id.item_character_linearLayout).setOnClickListener {
+                val bundle = Bundle()
+                bundle.putString(KEY_BUNDLE, "${model.id}")
+                val detailCharacterFragment = DetailCharacterFragment()
+                detailCharacterFragment.arguments = bundle
+                characterFragment.requireActivity()
+                    .supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.mainFragmentContainer, detailCharacterFragment)
+                    .addToBackStack("CharacterFragment")
+                    .commit()
+            }
+        }
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): CharacterViewHolder {
@@ -69,7 +70,9 @@ class CharacterListAdapter(
         val model = getItem(position)
         holder.bind(model, characterFragment)
     }
+
+
     companion object{
-        const val KEY_BUNDLE = "DetailCharacterFragment"
+        const val KEY_BUNDLE = "CharacterFragment"
     }
 }

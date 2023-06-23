@@ -19,10 +19,15 @@ class ApiViewModel @Inject constructor(): ViewModel(){
     val characterMutableLiveData = MutableLiveData<Character>()
     val episodeMutableLiveData = MutableLiveData<Episode>()
     val locationMutableLiveData = MutableLiveData<Location>()
-    val itemCharacterMutableLiveData = MutableLiveData<List<com.example.astonfinalproject.main.features.profile.data.dto.character.Result>>()
-    val itemEpisodeMutableLiveData = MutableLiveData<List<com.example.astonfinalproject.main.features.profile.data.dto.episode.Result>>()
-    val itemLocationMutableLiveData = MutableLiveData<List<com.example.astonfinalproject.main.features.profile.data.dto.location.Result>>()
-
+    val itemCharacterMutableLiveData = MutableLiveData<List<
+            com.example.astonfinalproject.main.features.profile.data.dto.character.Result
+            >>()
+    val itemEpisodeMutableLiveData = MutableLiveData<List<
+            com.example.astonfinalproject.main.features.profile.data.dto.episode.Result
+            >>()
+    val itemLocationMutableLiveData = MutableLiveData<List<
+            com.example.astonfinalproject.main.features.profile.data.dto.location.Result
+            >>()
 
     private val takeRepo = ApiRepository(NetworkModule().provideRetrofit().create(Api::class.java))
     private val takeCharacters = takeRepo.getResponseCharacter()
@@ -78,23 +83,6 @@ class ApiViewModel @Inject constructor(): ViewModel(){
         )
     }
 
-/*    fun getItemCharacter(characterNames: String){
-        compositeDisposable.add(takeRepo.getResponseItemCharacter(characterNames)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeWith(object: DisposableSingleObserver<List<com.example.astonfinalproject.main.features.profile.data.dto.character.Result>>(){
-                override fun onSuccess(characterResponse: List<com.example.astonfinalproject.main.features.profile.data.dto.character.Result>) {
-                    itemCharacterMutableLiveData.value = characterResponse
-                    Log.d("LOGTAG", "onSuccess $characterResponse")
-                }
-                override fun onError(e: Throwable) {
-                    Log.e("LOGTAG", "onError $e")
-                }
-            })
-        )
-    }*/
-
-
     fun getItemCharacter(characterNames: String,itemCharacterLiveData: MutableLiveData<String>){
         compositeDisposable.add(takeRepo.getResponseItemCharacter(characterNames)
             .subscribeOn(Schedulers.io())
@@ -112,25 +100,6 @@ class ApiViewModel @Inject constructor(): ViewModel(){
             })
         )
     }
-
-    fun getSingleCharacter(characterNames: String,itemCharacterLiveData: MutableLiveData<String>){
-        compositeDisposable.add(takeRepo.getResponseItemCharacter(characterNames)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeWith(object: DisposableSingleObserver<List<com.example.astonfinalproject.main.features.profile.data.dto.character.Result>>(){
-                override fun onSuccess(characterResponse: List<com.example.astonfinalproject.main.features.profile.data.dto.character.Result>) {
-                    itemCharacterMutableLiveData.value = characterResponse
-                    val characters = characterResponse.joinToString(", ") { it.name }
-                    itemCharacterLiveData.value = characters
-                    Log.d("LOGTAG", "onSuccess $characterResponse")
-                }
-                override fun onError(e: Throwable) {
-                    Log.e("LOGTAG", "onError $e")
-                }
-            })
-        )
-    }
-
 
     fun getItemEpisode(episodeNumber: String){
         compositeDisposable.add(takeRepo.getResponseItemEpisode(episodeNumber)

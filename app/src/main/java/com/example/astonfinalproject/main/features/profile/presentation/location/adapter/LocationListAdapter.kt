@@ -21,15 +21,19 @@ class LocationListAdapter(
 
         private val nameTextView: TextView = view.findViewById(R.id.location_name_textView)
         private val typeTextView: TextView = view.findViewById(R.id.location_type_textView)
-        private val dimensionTextView: TextView = view.findViewById(R.id.location_dimension_textView)
-        private val characterTextView: TextView = view.findViewById(R.id.location_characters_textView)
+        private val dimensionTextView: TextView =
+            view.findViewById(R.id.location_dimension_textView)
+        private val characterTextView: TextView =
+            view.findViewById(R.id.location_characters_textView)
 
         fun bind(model: LocationModel, locationFragment: LocationFragment){
             nameTextView.text = model.name
             typeTextView.text = model.type
             dimensionTextView.text = model.dimension
             characterTextView.text = model.residents
-
+            openDetailLocationFragment(model, locationFragment)
+        }
+        fun openDetailLocationFragment(model: LocationModel, locationFragment: LocationFragment){
             view.findViewById<LinearLayout>(R.id.location_linear_layout).setOnClickListener {
                 val bundle = Bundle()
                 bundle.putString(KEY_ARGS, "${model.id}")
@@ -39,7 +43,7 @@ class LocationListAdapter(
                     .supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.mainFragmentContainer, detailLocationFragment)
-                    .addToBackStack("DetailLocationFragment")
+                    .addToBackStack("LocationFragment")
                     .commit()
             }
         }

@@ -8,7 +8,7 @@ object DetailLocationDiffUtil : DiffUtil.ItemCallback<DetailLocationItemModel>()
         oldItem: DetailLocationItemModel,
         newItem: DetailLocationItemModel
     ): Boolean {
-        return oldItem.resident == newItem.resident
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(

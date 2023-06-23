@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,7 +20,6 @@ class CharacterFragment : Fragment() {
     private lateinit var adapter: CharacterListAdapter
     private var list: List<CharacterModel>? = null
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,8 +29,11 @@ class CharacterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
         recyclerView = view.findViewById(R.id.character_recView)
-        val gridLayoutManager = GridLayoutManager(activity?.baseContext, 2, GridLayoutManager.VERTICAL, false)
+        val gridLayoutManager = GridLayoutManager(
+            activity?.baseContext, 2, GridLayoutManager.VERTICAL, false
+        )
         recyclerView.layoutManager = gridLayoutManager
         adapter = CharacterListAdapter(this@CharacterFragment)
         recyclerView.adapter = adapter

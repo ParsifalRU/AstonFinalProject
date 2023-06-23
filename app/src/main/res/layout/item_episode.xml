@@ -8,13 +8,6 @@
     android:background="#E8F1D3"
     android:orientation="vertical">
 
-<!--
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
--->
-
         <TextView
             android:layout_margin="2dp"
             android:id="@+id/episode_name_textView"
@@ -39,6 +32,5 @@
             android:id="@+id/episode_characters_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-<!--    </LinearLayout>-->
 
 </LinearLayout>

@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
@@ -33,6 +34,7 @@ class EpisodeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
         recyclerView = view.findViewById(R.id.episode_recView)
         val gridLayoutManager = GridLayoutManager(activity?.baseContext, 2, GridLayoutManager.VERTICAL, false)
         recyclerView.layoutManager = gridLayoutManager
@@ -74,7 +76,9 @@ class EpisodeFragment : Fragment() {
                     Log.d("BALABOL", "$episodeModel")
 
                     list = tempList
-                    adapter.submitList(list)
+                    adapter.submitList(list) {
+                        recyclerView.scrollToPosition(savedPosition)
+                    }
                 }
                 viewModel.getItemCharacter(characterPersonages, itemCharacterLiveData)
             }

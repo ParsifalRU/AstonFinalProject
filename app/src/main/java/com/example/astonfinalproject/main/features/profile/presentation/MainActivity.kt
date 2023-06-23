@@ -1,6 +1,7 @@
 package com.example.astonfinalproject.main.features.profile.presentation
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
@@ -12,28 +13,24 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    var isSupportFragmentManagerEnabled = false
+    private var isSupportFragmentManagerEnabled = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         setSplashScreen()
-
         super.onCreate(savedInstanceState)
-
         if (savedInstanceState != null){
             isSupportFragmentManagerEnabled = savedInstanceState.getBoolean(FRAGMENT_MANAGER_KEY)
         }
-
         setContentView(com.example.astonfinalproject.R.layout.activity_main)
-
-
         if (!isSupportFragmentManagerEnabled){
             setFragment(CharacterFragment())
             isSupportFragmentManagerEnabled = true
         }
-
         setBottomNavigation()
 
+        supportActionBar?.setHomeAsUpIndicator(null)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 
     private fun setSplashScreen(){
@@ -71,6 +68,16 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> {return@setOnItemSelectedListener false}
             }
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressedDispatcher.onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

@@ -9,7 +9,7 @@ object DetailCharacterDiffUtil : DiffUtil.ItemCallback<DetailCharacterItemModel>
         oldItem: DetailCharacterItemModel,
         newItem: DetailCharacterItemModel
     ): Boolean {
-        return oldItem.episode == newItem.episode
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(
