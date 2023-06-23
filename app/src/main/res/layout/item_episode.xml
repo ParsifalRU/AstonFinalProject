@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/item_episode_linearLayout"
     android:layout_margin="5dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="#E8F1D3"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
+<!--
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+-->
 
         <TextView
             android:layout_margin="2dp"
@@ -36,6 +39,6 @@
             android:id="@+id/episode_characters_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
 </LinearLayout>

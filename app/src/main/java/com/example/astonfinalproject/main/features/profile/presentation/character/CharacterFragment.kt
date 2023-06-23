@@ -18,7 +18,7 @@ class CharacterFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: CharacterListAdapter
     private var list: List<CharacterModel>? = null
-    private var savedPosition: Int = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,14 +32,12 @@ class CharacterFragment : Fragment() {
         recyclerView = view.findViewById(R.id.character_recView)
         val gridLayoutManager = GridLayoutManager(activity?.baseContext, 2, GridLayoutManager.VERTICAL, false)
         recyclerView.layoutManager = gridLayoutManager
-        adapter = CharacterListAdapter()
+        adapter = CharacterListAdapter(this@CharacterFragment)
         recyclerView.adapter = adapter
 
         val viewModel = ViewModelProvider(this)[ApiViewModel::class.java]
 
-        if (savedInstanceState != null) {
-            savedPosition = savedInstanceState.getInt("position", 0)
-        }else{
+        if (savedInstanceState == null) {
             viewModel.getCharacters()
         }
 
@@ -54,15 +52,13 @@ class CharacterFragment : Fragment() {
                     image = response.results[index].image,
                 )
             }
-            adapter.submitList(list) {
-                recyclerView.scrollToPosition(savedPosition)
-            }
+            adapter.submitList(list)
         }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt(POSITION, (recyclerView.layoutManager as? GridLayoutManager)?.findFirstVisibleItemPosition() ?: 0)
+        outState.putString(POSITION, "isInit")
     }
 
     companion object {

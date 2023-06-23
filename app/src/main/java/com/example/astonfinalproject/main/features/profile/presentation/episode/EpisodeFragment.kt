@@ -36,7 +36,7 @@ class EpisodeFragment : Fragment() {
         recyclerView = view.findViewById(R.id.episode_recView)
         val gridLayoutManager = GridLayoutManager(activity?.baseContext, 2, GridLayoutManager.VERTICAL, false)
         recyclerView.layoutManager = gridLayoutManager
-        adapter = EpisodeListAdapter()
+        adapter = EpisodeListAdapter(this@EpisodeFragment)
         recyclerView.adapter = adapter
 
         val viewModel = ViewModelProvider(this)[ApiViewModel::class.java]
@@ -74,14 +74,11 @@ class EpisodeFragment : Fragment() {
                     Log.d("BALABOL", "$episodeModel")
 
                     list = tempList
-                    adapter.submitList(list) {
-                        recyclerView.scrollToPosition(savedPosition)
-                    }
+                    adapter.submitList(list)
                 }
                 viewModel.getItemCharacter(characterPersonages, itemCharacterLiveData)
             }
         }
-
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -92,5 +89,4 @@ class EpisodeFragment : Fragment() {
     companion object {
         const val POSITION = "position"
     }
-
 }

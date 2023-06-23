@@ -20,8 +20,8 @@ class ApiViewModel @Inject constructor(): ViewModel(){
     val episodeMutableLiveData = MutableLiveData<Episode>()
     val locationMutableLiveData = MutableLiveData<Location>()
     val itemCharacterMutableLiveData = MutableLiveData<List<com.example.astonfinalproject.main.features.profile.data.dto.character.Result>>()
-    val itemEpisodeMutableLiveData = MutableLiveData<List<Episode>>()
-    val itemLocationMutableLiveData = MutableLiveData<List<Location>>()
+    val itemEpisodeMutableLiveData = MutableLiveData<List<com.example.astonfinalproject.main.features.profile.data.dto.episode.Result>>()
+    val itemLocationMutableLiveData = MutableLiveData<List<com.example.astonfinalproject.main.features.profile.data.dto.location.Result>>()
 
 
     private val takeRepo = ApiRepository(NetworkModule().provideRetrofit().create(Api::class.java))
@@ -104,6 +104,24 @@ class ApiViewModel @Inject constructor(): ViewModel(){
                     itemCharacterMutableLiveData.value = characterResponse
                     val characters = characterResponse.joinToString(", ") { it.name }
                     itemCharacterLiveData.value = characters
+                    Log.d("LOGTAG", " onSuccess $characterResponse")
+                }
+                override fun onError(e: Throwable) {
+                    Log.e("LOGTAG", "onError $e")
+                }
+            })
+        )
+    }
+
+    fun getSingleCharacter(characterNames: String,itemCharacterLiveData: MutableLiveData<String>){
+        compositeDisposable.add(takeRepo.getResponseItemCharacter(characterNames)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(object: DisposableSingleObserver<List<com.example.astonfinalproject.main.features.profile.data.dto.character.Result>>(){
+                override fun onSuccess(characterResponse: List<com.example.astonfinalproject.main.features.profile.data.dto.character.Result>) {
+                    itemCharacterMutableLiveData.value = characterResponse
+                    val characters = characterResponse.joinToString(", ") { it.name }
+                    itemCharacterLiveData.value = characters
                     Log.d("LOGTAG", "onSuccess $characterResponse")
                 }
                 override fun onError(e: Throwable) {
@@ -114,12 +132,12 @@ class ApiViewModel @Inject constructor(): ViewModel(){
     }
 
 
-    fun getItemEpisode(episodeNumber: String,itemCharacterLiveData: MutableLiveData<String>){
+    fun getItemEpisode(episodeNumber: String){
         compositeDisposable.add(takeRepo.getResponseItemEpisode(episodeNumber)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribeWith(object: DisposableSingleObserver<List<Episode>>(){
-                override fun onSuccess(characterResponse: List<Episode>) {
+            .subscribeWith(object: DisposableSingleObserver<List<com.example.astonfinalproject.main.features.profile.data.dto.episode.Result>>(){
+                override fun onSuccess(characterResponse: List<com.example.astonfinalproject.main.features.profile.data.dto.episode.Result>) {
                     itemEpisodeMutableLiveData.value = characterResponse
                     Log.d("LOGTAG", "onSuccess $characterResponse")
                 }
@@ -134,10 +152,10 @@ class ApiViewModel @Inject constructor(): ViewModel(){
         compositeDisposable.add(takeRepo.getResponseItemLocation(locationNames)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribeWith(object: DisposableSingleObserver<List<Location>>(){
-                override fun onSuccess(characterResponse: List<Location>) {
+            .subscribeWith(object: DisposableSingleObserver<List<com.example.astonfinalproject.main.features.profile.data.dto.location.Result>>(){
+                override fun onSuccess(characterResponse: List<com.example.astonfinalproject.main.features.profile.data.dto.location.Result>) {
                     itemLocationMutableLiveData.value = characterResponse
-                    Log.d("LOGTAG", "onSuccess $characterResponse")
+                    Log.d("LOGTAG", "get Item Location onSuccess $characterResponse")
                 }
                 override fun onError(e: Throwable) {
                     Log.e("LOGTAG", "onError $e")

@@ -22,7 +22,6 @@ class LocationFragment : Fragment() {
     private var list: List<LocationModel>? = null
     private var savedPosition: Int = 0
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,7 +37,7 @@ class LocationFragment : Fragment() {
         recyclerView = view.findViewById(R.id.location_recView)
         val gridLayoutManager = GridLayoutManager(activity?.baseContext, 2, GridLayoutManager.VERTICAL, false)
         recyclerView.layoutManager = gridLayoutManager
-        adapter = LocationListAdapter(viewModel)
+        adapter = LocationListAdapter(this@LocationFragment)
         recyclerView.adapter = adapter
 
         if (savedInstanceState != null) {
@@ -74,9 +73,7 @@ class LocationFragment : Fragment() {
                     Log.d("BALABOL", "$locationModel")
 
                     list = tempList
-                    adapter.submitList(list) {
-                        recyclerView.scrollToPosition(savedPosition)
-                    }
+                    adapter.submitList(list)
                 }
                 viewModel.getItemCharacter(characterPersonages, itemCharacterLiveData)
             }

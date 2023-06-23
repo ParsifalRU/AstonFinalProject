@@ -1,41 +1,61 @@
 package com.example.astonfinalproject.main.features.profile.presentation.detailcharacter.adapter
 
-/*
-class DetailCharacterListAdapter:
-    androidx.recyclerview.widget.ListAdapter<DetailCharacterModel,  DetailCharacterListAdapter.DetailCharacterViewHolder>(
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.astonfinalproject.R
+import com.example.astonfinalproject.main.features.profile.presentation.detailcharacter.DetailCharacterFragment
+import com.example.astonfinalproject.main.features.profile.presentation.detaillocation.DetailLocationFragment
+import com.example.astonfinalproject.main.features.profile.presentation.location.adapter.LocationListAdapter
+
+class DetailCharacterListAdapter(
+    private val detailCharacterFragment: DetailCharacterFragment
+):
+    androidx.recyclerview.widget.ListAdapter<DetailCharacterItemModel,  DetailCharacterListAdapter.DetailCharacterViewHolder>(
     DetailCharacterDiffUtil
 ){
 
+    var list = emptyList<String>()
+
     class  DetailCharacterViewHolder(private val view: View): RecyclerView.ViewHolder(view){
 
-        fun bind(model:  DetailCharacterModel){
-            view.findViewById<TextView>(R.id.character_name_textView).text = model.name
-            view.findViewById<TextView>(R.id.character_name_textView).text = model.status
-            view.findViewById<TextView>(R.id.character_name_textView).text = model.species
-            view.findViewById<TextView>(R.id.character_name_textView).text = model.gender
-            setImage(view.context,"https://rickandmortyapi.com/api/character/avatar/1.jpeg", view.findViewById(
-                R.id.character_imageView))
-        }
+        fun bind(model: DetailCharacterItemModel, detailCharacterFragment: DetailCharacterFragment){
+            view.findViewById<TextView>(R.id.item_episode).text = model.episode
 
-        private fun setImage(context: Context, url: String, imageView: ImageView){
-            Glide
-                .with(context)
-                .load(url)
-                .centerCrop()
-                .placeholder(R.drawable.ic_launcher_background)
-                .into(imageView)
+            view.findViewById<TextView>(R.id.item_episode).setOnClickListener {
+                val bundle = Bundle()
+                val episodeNumber: String = model.episode
+                    .replace("https://rickandmortyapi.com/api/episode/", "")
+                    .replace("[", "")
+                    .replace("]", "")
+                    .replace(" ", "")
+                bundle.putString(LocationListAdapter.KEY_ARGS, episodeNumber)
+                val detailLocationFragment = DetailLocationFragment()
+                detailLocationFragment.arguments = bundle
+                detailCharacterFragment.requireActivity()
+                    .supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.mainFragmentContainer, detailLocationFragment)
+                    .addToBackStack("DetailCharacterFragment")
+                    .commit()
+            }
         }
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int):  DetailCharacterListAdapter. DetailCharacterViewHolder {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int):  DetailCharacterViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.item_character, viewGroup, false)
-        return  DetailCharacterListAdapter. DetailCharacterViewHolder(view)
+            .inflate(R.layout.item_detail_character, viewGroup, false)
+
+        return  DetailCharacterViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder:  DetailCharacterListAdapter. DetailCharacterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder:  DetailCharacterViewHolder, position: Int) {
         val model = getItem(position)
-        holder.bind(model)
 
+        holder.bind(model, detailCharacterFragment)
     }
-}*/
+
+}

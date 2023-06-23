@@ -1,20 +1,21 @@
 package com.example.astonfinalproject.main.features.profile.presentation.detailcharacter.adapter
 
-/*
+
 import androidx.recyclerview.widget.DiffUtil
 
-object DetailCharacterDiffUtil : DiffUtil.ItemCallback<DetailCharacterModel>() {
+object DetailCharacterDiffUtil : DiffUtil.ItemCallback<DetailCharacterItemModel>() {
+
     override fun areItemsTheSame(
-        oldItem: DetailCharacterModel,
-        newItem: DetailCharacterModel
+        oldItem: DetailCharacterItemModel,
+        newItem: DetailCharacterItemModel
     ): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.episode == newItem.episode
     }
 
     override fun areContentsTheSame(
-        oldItem: DetailCharacterModel,
-        newItem: DetailCharacterModel
+        oldItem: DetailCharacterItemModel,
+        newItem: DetailCharacterItemModel
     ): Boolean {
-        return oldItem == newItem
+        return oldItem== newItem
     }
-}*/
+}

@@ -32,10 +32,10 @@ interface Api {
     @GET(EPISODE + ITEM_EPISODE)
     fun getItemEpisode(
         @Path("number_episode") number_episode: String
-    ): Single<List<Episode>>
+    ): Single<List<com.example.astonfinalproject.main.features.profile.data.dto.episode.Result>>
 
     @GET(LOCATION + ITEM_LOCATION)
     fun getItemLocation(
         @Path("number_location") number_location: String
-    ): Single<List<Location>>
+    ): Single<List<com.example.astonfinalproject.main.features.profile.data.dto.location.Result>>
 }

@@ -21,10 +21,10 @@ class ApiRepository(
     fun getResponseItemCharacter(charactersNames: String): Single<List<Result>> {
         return api.getItemCharacter(charactersNames)
     }
-    fun getResponseItemEpisode(episodesNumbers: String): Single<List<Episode>> {
+    fun getResponseItemEpisode(episodesNumbers: String): Single<List<com.example.astonfinalproject.main.features.profile.data.dto.episode.Result>> {
         return api.getItemEpisode(episodesNumbers)
     }
-    fun getResponseItemLocation(locationsNames: String): Single<List<Location>> {
+    fun getResponseItemLocation(locationsNames: String): Single<List<com.example.astonfinalproject.main.features.profile.data.dto.location.Result>> {
         return api.getItemLocation(locationsNames)
     }
 }
